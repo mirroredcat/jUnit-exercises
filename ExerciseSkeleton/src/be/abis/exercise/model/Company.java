@@ -10,6 +10,14 @@ public class Company {
 		this.address = address;
 	}
 
+	public double calculateTaxToPay(){
+		return switch (address.getCountryCode()) {
+			case "BE" -> 51.0;
+			case "NL" -> 47.0;
+			default -> 35.0;
+		};
+	}
+
 	public String getName() {
 		return name;
 	}
