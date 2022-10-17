@@ -2,6 +2,7 @@ package be.abis.exercise.test;
 
 import be.abis.exercise.model.Address;
 import be.abis.exercise.model.Company;
+import be.abis.exercise.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,7 @@ public class CompanyTest {
     Address a1;
     Address a2;
     Company c1;
+    Person p1;
 
     @BeforeEach
     void setUp(){

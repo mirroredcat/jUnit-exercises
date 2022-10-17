@@ -11,7 +11,8 @@ public class Company {
 	}
 
 	public double calculateTaxToPay(){
-		return switch (address.getCountryCode()) {
+		//System.out.println(address.getCountryCode());
+		return switch (getAddress().getCountryCode()) {
 			case "BE" -> 51.0;
 			case "NL" -> 47.0;
 			default -> 35.0;

@@ -1,6 +1,7 @@
 package be.abis.exercise.model;
 
 import be.abis.exercise.exception.PersonShouldBeAdultException;
+import be.abis.exercise.exception.SalaryTooLowException;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -13,6 +14,7 @@ public class Person implements Comparable<Person>{
 	private String lastName;
 	private LocalDate birthDate;
 	private Company company;
+	private double grossSalary;
 	
 	public Person(int personNumber, String firstName, String lastName, LocalDate birthDay) {
 		this.personNumber = personNumber;
@@ -21,9 +23,27 @@ public class Person implements Comparable<Person>{
 		this.birthDate = birthDay;
 	}
 
-	public Person(int personNumber, String firstName, String lastName, LocalDate birthDate, Company company) {
+	public Person(int personNumber, String firstName, String lastName, LocalDate birthDate, Company company, double grossSalary) {
 		this(personNumber,firstName,lastName,birthDate);
 		this.company = company;
+		this.grossSalary = grossSalary;
+	}
+
+	public double calculateNetSalary()throws SalaryTooLowException {
+		double netSalary = (grossSalary - ((company.calculateTaxToPay()/100) * grossSalary));
+		if (netSalary < 1500){
+			throw new SalaryTooLowException("Salary under 1500");
+		} else {
+			return netSalary;
+		}
+	}
+
+	public double getGrossSalary() {
+		return grossSalary;
+	}
+
+	public void setGrossSalary(double grossSalary) {
+		this.grossSalary = grossSalary;
 	}
 
 	public int getPersonNumber() {
@@ -83,6 +103,8 @@ public class Person implements Comparable<Person>{
 		if (age<18) throw new PersonShouldBeAdultException(this.getFirstName() + ", you are too young");
 		return age;
 	}
+
+
 
 	@Override
 	public int compareTo(Person person) {
